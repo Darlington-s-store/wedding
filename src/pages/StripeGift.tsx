@@ -12,6 +12,9 @@ const StripeGift = () => {
   const [customAmount, setCustomAmount] = useState("");
   const [email, setEmail] = useState("");
   const [note, setNote] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [location, setLocation] = useState("");
   const [currentBgImage, setCurrentBgImage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<{email?: string; amount?: string}>({});
@@ -62,6 +65,9 @@ const StripeGift = () => {
             amount: amountToPay,
             email,
             note,
+            name,
+            phone,
+            location,
           }),
         }
       );
@@ -208,6 +214,49 @@ const StripeGift = () => {
                   {errors.email}
                 </motion.p>
               )}
+            </div>
+
+            {/* Contact Details */}
+            <div className="mb-6 grid grid-cols-1 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-white mb-2">
+                  Your Name
+                </label>
+                <motion.input
+                  type="text"
+                  placeholder="e.g., Jane Doe"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full border-2 border-yellow-500 rounded-xl p-4 text-lg font-medium bg-gray-800 text-white shadow-md focus:border-yellow-400 focus:outline-none transition-all duration-300 placeholder-gray-400"
+                  whileFocus={{ scale: 1.02 }}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-white mb-2">
+                  Phone Number
+                </label>
+                <motion.input
+                  type="tel"
+                  placeholder="e.g., +44 7123 456789"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-full border-2 border-yellow-500 rounded-xl p-4 text-lg font-medium bg-gray-800 text-white shadow-md focus:border-yellow-400 focus:outline-none transition-all duration-300 placeholder-gray-400"
+                  whileFocus={{ scale: 1.02 }}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-white mb-2">
+                  Location
+                </label>
+                <motion.input
+                  type="text"
+                  placeholder="City / Country"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  className="w-full border-2 border-yellow-500 rounded-xl p-4 text-lg font-medium bg-gray-800 text-white shadow-md focus:border-yellow-400 focus:outline-none transition-all duration-300 placeholder-gray-400"
+                  whileFocus={{ scale: 1.02 }}
+                />
+              </div>
             </div>
 
             {/* Message Input */}

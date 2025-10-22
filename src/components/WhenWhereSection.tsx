@@ -29,14 +29,16 @@ interface EventDetailsProps {
   noBg = false,
   index,
 }) => {
-  const itemVariants = {
+  // Use Variants typing and an easing curve compatible with Transition types
+  const itemVariants: import("framer-motion").Variants = {
     hidden: { opacity: 0, y: 50 },
-    visible: (i = 0) => ({
+    visible: (i: number = 0) => ({
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut", delay: i * 0.2 },
+      // ease: [0.16, 1, 0.3, 1] approximates an easeOut curve
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: i * 0.2 },
     }),
-  } as const;
+  };
 
   const handleCopy = async () => {
     try {
@@ -194,4 +196,3 @@ const WhenWhereSection: React.FC<WhenWhereSectionProps> = ({ className = "" }) =
 };
 
 export default WhenWhereSection;
-              <span>Garden Setting</span>
