@@ -13,11 +13,10 @@ const StripeGift = () => {
   const [email, setEmail] = useState("");
   const [note, setNote] = useState("");
   const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
   const [phone, setPhone] = useState("");
   const [currentBgImage, setCurrentBgImage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState<{email?: string; amount?: string; name?: string; location?: string; phone?: string}>({});
+  const [errors, setErrors] = useState<{email?: string; amount?: string; name?: string; phone?: string}>({});
   const [showSuccess, setShowSuccess] = useState(false);
   
   const backgroundImages = [hero3, hero7, hero9];
@@ -34,7 +33,7 @@ const StripeGift = () => {
   const amountToPay = selectedAmount || Number(customAmount);
 
   const validateForm = () => {
-    const newErrors: {email?: string; amount?: string; name?: string; location?: string; phone?: string} = {};
+    const newErrors: {email?: string; amount?: string; name?: string; phone?: string} = {};
     
     if (!email) {
       newErrors.email = "Email is required";
@@ -46,7 +45,6 @@ const StripeGift = () => {
       newErrors.amount = "Please select or enter a valid amount";
     }
     if (!name.trim()) newErrors.name = "Name is required";
-    if (!location.trim()) newErrors.location = "Location is required";
     if (!phone.trim()) newErrors.phone = "Phone number is required";
     
     setErrors(newErrors);
@@ -69,7 +67,6 @@ const StripeGift = () => {
             email,
             note,
             name,
-            location,
             phone,
           }),
         }
@@ -247,32 +244,6 @@ const StripeGift = () => {
                   </motion.p>
                 )}
               </div>
-              <div>
-                <label className="block text-sm font-semibold text-white mb-2">
-                  Location *
-                </label>
-                <motion.input
-                  type="text"
-                  placeholder="City, Country"
-                  value={location}
-                  onChange={(e) => {
-                    setLocation(e.target.value);
-                    setErrors(prev => ({ ...prev, location: undefined }));
-                  }}
-                  className="w-full border-2 border-yellow-500 rounded-xl p-4 text-lg font-medium bg-gray-800 text-white shadow-md focus:border-yellow-400 focus:outline-none transition-all duration-300 placeholder-gray-400"
-                  whileFocus={{ scale: 1.02 }}
-                />
-                {errors.location && (
-                  <motion.p 
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-red-500 text-sm mt-2 flex items-center"
-                  >
-                    <AlertCircle className="w-4 h-4 mr-1" />
-                    {errors.location}
-                  </motion.p>
-                )}
-              </div>
               <div className="sm:col-span-2">
                 <label className="block text-sm font-semibold text-white mb-2">
                   Phone Number *
@@ -327,7 +298,6 @@ const StripeGift = () => {
                   !amountToPay ||
                   !email ||
                   !name.trim() ||
-                  !location.trim() ||
                   !phone.trim()
                 }
                 className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-black font-bold py-4 px-8 rounded-xl hover:from-yellow-400 hover:to-yellow-500 transition-all duration-300 text-lg shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
